@@ -1,50 +1,52 @@
-'''
+class MinStack:
 
-计一个支持 push，pop，top 操作，并能在常数时间内检索到最小元素的栈。
+    def __init__(self):
+        """
+        initialize your data structure here.
+        """
+        self.ans = []
 
-push(x) -- 将元素 x 推入栈中。
-pop() -- 删除栈顶的元素。
-top() -- 获取栈顶元素。
-getMin() -- 检索栈中的最小元素。
+    def push(self, x: int) -> None:
+        self.ans.append(x)
 
-'''
+    def pop(self) -> None:
+        self.ans.pop()
+
+    def top(self) -> int:
+        return self.ans[-1]
+
+    def getMin(self) -> int:
+        return min(self.ans)
 
 
+# 最快答案
 class MinStack:
     def __init__(self):
         """
         initialize your data structure here.
         """
-        self.stack = []
-        self.min = [9999999]
+        
+        self.data=[]
+        self.min=[]
+        
 
-    def push(self, x):
-        """
-        :type x: int
-        :rtype: void
-        """
-        self.stack.insert(0, x)
-        if x < self.min[0]:
-            self.min.insert(0, x)
-        if len(self.min) >= 10:
-            self.min.pop(0)
+    # 因为是先进先出 所以这么写确实没问题
+    def push(self, x: int) -> None:
+        self.data.append(x)
+        if len(self.min)==0:
+            self.min.append(x)
+        elif self.min[-1]>=x:
+            self.min.append(x)
 
-    def pop(self):
-        """
-        :rtype: void
-        """
-        temp = self.stack.pop()
-        if temp == self.min[0]:
-            self.min.remove(temp)
+    def pop(self) -> None:
+        x=self.data[-1]
+        self.data.pop(-1)
+        if x==self.min[-1]:
+            self.min.pop(-1)
 
-    def top(self):
-        """
-        :rtype: int
-        """
-        return self.stack[-1]
+    def top(self) -> int:
+        return self.data[-1]
 
-    def getMin(self):
-        """
-        :rtype: int
-        """
-        return self.min[0]
+    def getMin(self) -> int:
+        return self.min[-1]
+
