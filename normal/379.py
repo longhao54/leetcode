@@ -6,20 +6,21 @@ class PhoneDirectory:
         @param maxNumbers - The maximum numbers that can be stored in the phone directory.
         """
         self.d = {}
-        print(maxNumbers)
+        self.unused = set()
         for i in range(maxNumbers):
             self.d[i] = True
+            self.unused.add(i)
 
     def get(self) -> int:
         """
         Provide a number which is not assigned to anyone.
         @return - Return an available number. Return -1 if none is available.
         """
-        for k, v in self.d.items():
-            if v :
-                self.d[k] = False
-                return k
-        return -1
+        if not self.unused:
+            return -1
+        t1 = self.unused.pop()
+        self.d[t1] = False
+        return t1
         
         
 
@@ -34,6 +35,7 @@ class PhoneDirectory:
         """
         Recycle or release a number.
         """
+        self.unused.add(number)
         self.d[number] = True
         
 
