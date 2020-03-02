@@ -37,4 +37,15 @@ class Solution(object):
             curr = next
         return prev
 
-
+# 较快的做法
+class Solution:
+    def reverseList(self, head: ListNode) -> ListNode:
+        last = None
+        while head:
+            t = head.next
+            head.next = last
+            last = head
+            if not t:
+                break
+            head = t
+        return head
