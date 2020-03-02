@@ -1,0 +1,36 @@
+# 按着答案给的思路做的 回头还是得重新看一遍
+class Solution:
+    def buildTree(self, preorder: List[int], inorder: List[int]) -> TreeNode:
+        def check(start = 0, end = len(preorder)):
+            nonlocal now
+            if start == end:
+                return None
+            val = preorder[now]
+            now += 1
+            root = TreeNode(val)
+            index = nums[val]
+            root.left = check(start, index)
+            root.right = check(index+1, end)
+            return root
+            
+        now = 0
+        nums = {val:index for index, val in enumerate(inorder)}
+        return check() 
+
+# 答案给的思路
+class Solution:
+    def buildTree(self, preorder: List[int], inorder: List[int]) -> TreeNode:
+        def helper(in_left = 0, in_right = len(inorder)):
+            nonlocal pre_idx
+            if in_left == in_right:
+                return None
+            root_val = preorder[pre_idx]
+            root = TreeNode(root_val)
+            index = idx_map[root_val]
+            pre_idx += 1
+            root.left = helper(in_left, index)
+            root.right = helper(index + 1, in_right)
+            return root
+        pre_idx = 0
+        idx_map = {val:idx for idx, val in enumerate(inorder)} 
+        return helper()
