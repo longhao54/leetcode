@@ -1,3 +1,4 @@
+# 往左添加
 class Solution:
     def sortedArrayToBST(self, nums: List[int]) -> TreeNode:        
         def helper(left, right):
@@ -11,6 +12,7 @@ class Solution:
         return helper(0, len(nums) - 1)
 
 
+# 往右添加
 class Solution:
     def sortedArrayToBST(self, nums: List[int]) -> TreeNode:        
         def helper(left, right):
@@ -26,6 +28,7 @@ class Solution:
         return helper(0, len(nums) - 1)
 
 
+# 往左右添加
 from random import randint
 class Solution:
     def sortedArrayToBST(self, nums: List[int]) -> TreeNode:        
