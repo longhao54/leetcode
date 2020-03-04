@@ -26,3 +26,14 @@ class Solution:
                     right -= 1
         return left == 0 and right == 0
     
+# 最快答案
+class Solution:
+    def isValidSerialization(self, preorder: str) -> bool:
+        preorder = preorder.split(",")
+        edges = 1
+        for item in preorder:
+            edges -= 1
+            if edges < 0: return False
+            if item != "#":
+                edges += 2
+        return edges == 0
