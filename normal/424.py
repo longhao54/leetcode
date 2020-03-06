@@ -20,3 +20,19 @@ class Solution:
         if sum(t.values()) - max(t.values()) <= k:
             ans = max(ans, sum(t.values()))
         return ans
+
+
+# 最快答案
+class Solution:
+    def characterReplacement(self, s: str, k: int) -> int:
+        count = collections.defaultdict(int)
+        left = maxcount = 0
+        ans = 0
+        for i in range(len(s)):
+            count[s[i]] += 1
+            maxcount = max(maxcount, count[s[i]])
+            if i-left+1 > maxcount + k:
+                count[s[left]] -= 1
+                left += 1
+            # ans = max(ans, i-left+1)
+        return len(s)-left
