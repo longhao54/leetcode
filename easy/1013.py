@@ -5,19 +5,20 @@ class Solution:
             return False
         num = All // 3
         sum3 = {0:0,1:0,2:0}
+        a = [0,0,0]
         count = 0
         for i in A:
             if i == 0:
                 continue
-            if sum3[count] == num:
+            if a[count] != 0 and sum3[count] == num:
                 if count != 2:
                     count += 1
-            
             sum3[count] += i
-        return sum3[0] == sum3[1] and sum3[0] == sum3[2]
+            a[count] += 1
+        return 0 not in a and sum3[0] == sum3[1] and sum3[0] == sum3[2]
 
-    def fast(self, A):
-        class Solution:
+
+class Solution:
     def canThreePartsEqualSum(self, A: List[int]) -> bool:
         sums = sum(A)
         if sums % 3:
