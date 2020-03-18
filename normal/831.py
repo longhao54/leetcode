@@ -6,7 +6,7 @@ class Solution(object):
                 first[0], first[-1], after).lower()
 
         else: #phone
-            digits = filter(unicode.isdigit, S)
+            digits = "".join([i for i in S if i in "1234567890"])
             local = "***-***-{}".format(digits[-4:])
             if len(digits) == 10:
                 return local
