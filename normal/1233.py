@@ -13,3 +13,14 @@ class Solution:
                     break
             start += 1
         return folder
+
+
+# 最快答案
+class Solution:
+    def removeSubfolders(self, folder):
+
+        roots = ['0']
+        for fd in sorted(folder):
+            if not fd.startswith(roots[-1] + '/'):
+                roots.append(fd)
+        return roots[1:]
