@@ -2,7 +2,7 @@ class Solution:
     def reconstructMatrix(self, upper: int, lower: int, colsum: List[int]) -> List[List[int]]:
         ans = [[0]*len(colsum) for i in range(2)]
         sc = sum(colsum)
-        if sc > upper + lower:
+        if sc != upper + lower or colsum.count(2) > upper:
             return []
         for i, v in enumerate(colsum):
             if v == 2:
