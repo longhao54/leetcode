@@ -1,0 +1,29 @@
+class Solution:
+    def search(self, nums: List[int], target: int) -> int:
+        start, end, ans = 0, len(nums), 0
+        c = False
+        last = float("inf")
+        while start < end:
+            mid = (start + end) // 2 
+            if mid == last:
+                break
+            if nums[mid] == target:
+                c = True
+                break 
+            elif nums[mid] > target:
+                end = mid
+            else:
+                start = mid
+            last = mid
+        if c:
+            ans += 1
+            left, right = mid, mid
+            # 前
+            while left >= 1 and nums[left-1] == target:
+                ans += 1
+                left -= 1
+            # 后
+            while right <= len(nums) - 2 and nums[right+1] == target:
+                ans += 1
+                right += 1
+        return ans
