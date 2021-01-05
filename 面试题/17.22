@@ -1,0 +1,58 @@
+# 超时方法
+
+from collections import defaultdict
+
+class Solution:
+    def findLadders(self, beginWord: str, endWord: str, wordList: List[str]) -> List[str]:
+        check = defaultdict(set)
+        for w in wordList:
+            for i in range(0, len(w)):
+                check[w[0:i]+"*"+w[i+1:]].add(w)
+        ans = []
+        def dfs(now="", used=[]):
+            nonlocal ans
+            if now == endWord:
+                ans = used
+            if len(ans) != 0:
+                return 
+
+            for i in range(0, len(now)):
+                word = now[0:i]+"*"+now[i+1:]
+                for t in check[word]:
+                    if t not in used:
+                        dfs(t, used+[t])
+
+        dfs(beginWord, [beginWord])
+        return ans
+
+
+
+# 稍微改进
+from collections import defaultdict
+
+class Solution:
+    def findLadders(self, beginWord: str, endWord: str, wordList: List[str]) -> List[str]:
+        check = defaultdict(set)
+        for w in wordList:
+            for i in range(0, len(w)):
+                check[w[0:i]+"*"+w[i+1:]].add(w)
+        ans = []
+        usddic = {}
+        def dfs(now="", used=[]):
+            nonlocal ans, usddic
+            if now == endWord:
+                ans = used
+            if len(ans) != 0:
+                return 
+
+            for i in range(0, len(now)):
+                word = now[0:i]+"*"+now[i+1:]
+                for t in check[word]:
+                    if t in usddic:  # 去重作用 否则会超时
+                        continue
+                    usddic[t] = 1
+                    if t not in used:
+                        dfs(t, used+[t])
+
+        dfs(beginWord, [beginWord])
+        return ans
