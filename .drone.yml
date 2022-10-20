@@ -1,0 +1,17 @@
+kind: pipeline
+type: docker
+name: leetcode
+
+steps:
+- name: job1
+  image: metaapp-registry-vpc.cn-beijing.cr.aliyuncs.com/metaops/golang:v1.16-alpine
+  commands:
+  - date
+  - hostname
+
+- name: job2
+  image: metaapp-registry-vpc.cn-beijing.cr.aliyuncs.com/metaops/golang:v1.16-alpine
+  commands:
+  - hostname
+  - ls 
+  - pwd
